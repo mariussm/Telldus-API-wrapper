@@ -11,5 +11,12 @@ namespace Telldus_API_wrapper.Controllers
 
             return Ok(new List<int>() { 1, 2, 3 });
         }
+
+        [HttpGet]
+        public IHttpActionResult Get(string a)
+        {
+
+            return Ok(new List<string>() { "marius", a, "barius" });
+        }
     }
 }
