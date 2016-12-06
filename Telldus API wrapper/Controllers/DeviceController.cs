@@ -19,5 +19,13 @@ namespace Telldus_API_wrapper.Controllers
 
             return list;
         }
+
+        public bool Post(String ConsumerKey, String ConsumerSecret, String Token, String TokenSecret, String id, String state)
+        //public TelldusSensor[] Get(String ConsumerKey, String ConsumerSecret, String Token, String TokenSecret)
+        {
+            TelldusHelper Helper = new TelldusHelper(ConsumerKey, ConsumerSecret, Token, TokenSecret);
+            return Helper.SetSwitchState(id, state);
+                
+        }
     }
 }

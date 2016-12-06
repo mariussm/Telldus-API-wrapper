@@ -35,6 +35,15 @@ namespace Telldus_API_wrapper.Helper
             return (ConsumerRequest) session.Request(accessToken);
         }
 
+        internal bool SetSwitchState(string id, string state)
+        {
+            ConsumerRequest request = NewRequest();
+            request.Context.RequestMethod = "GET";
+            request.Context.RawUri = GetUri("device/" + (state == "on" ? "turnOn" : "turnOff") + "?id=" + id);
+            String body = DevDefined.OAuth.Consumer.ConsumerRequestExtensions.ReadBody(request);
+            return body.Contains("success"); // .Equals("{\"status\":\"success\"}");
+        }
+
         internal TelldusDeviceList GetDevices()
         {
             ConsumerRequest request = NewRequest();
