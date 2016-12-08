@@ -44,11 +44,20 @@ namespace Telldus_API_wrapper.Helper
             return body.Contains("success"); // .Equals("{\"status\":\"success\"}");
         }
 
+        internal bool SetDimmerState(string id, int level)
+        {
+            ConsumerRequest request = NewRequest();
+            request.Context.RequestMethod = "GET";
+            request.Context.RawUri = GetUri("device/dim?id=" + id + "&level=" + level);
+            String body = DevDefined.OAuth.Consumer.ConsumerRequestExtensions.ReadBody(request);
+            return body.Contains("success"); // .Equals("{\"status\":\"success\"}");
+        }
+
         internal TelldusDeviceList GetDevices()
         {
             ConsumerRequest request = NewRequest();
             request.Context.RequestMethod = "GET";
-            request.Context.RawUri = GetUri("devices/list?supportedMethods=19");
+            request.Context.RawUri = GetUri("devices/list"); // ?supportedMethods=19");
 
             String body = DevDefined.OAuth.Consumer.ConsumerRequestExtensions.ReadBody(request);
             return new JavaScriptSerializer().Deserialize<TelldusDeviceList>(body); 

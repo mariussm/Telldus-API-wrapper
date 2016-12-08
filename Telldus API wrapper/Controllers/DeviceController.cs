@@ -27,5 +27,24 @@ namespace Telldus_API_wrapper.Controllers
             return Helper.SetSwitchState(id, state);
                 
         }
+
+        public bool Post(String ConsumerKey, String ConsumerSecret, String Token, String TokenSecret, String id, int level)
+        {
+            TelldusHelper Helper = new TelldusHelper(ConsumerKey, ConsumerSecret, Token, TokenSecret);
+            if (level >= 100)
+            {
+                return Helper.SetSwitchState(id, "on");
+            }
+            else if (level <= 0)
+            {
+                return Helper.SetSwitchState(id, "off");
+            }
+            else
+            {
+                double dlevel = (((double)level) / ((double)100))* ((double)255);
+                return Helper.SetDimmerState(id, (int) dlevel);
+            }
+
+        }
     }
 }
