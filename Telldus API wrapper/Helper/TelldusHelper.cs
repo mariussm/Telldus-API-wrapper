@@ -57,7 +57,7 @@ namespace Telldus_API_wrapper.Helper
         {
             ConsumerRequest request = NewRequest();
             request.Context.RequestMethod = "GET";
-            request.Context.RawUri = GetUri("devices/list"); // ?supportedMethods=19");
+            request.Context.RawUri = GetUri("devices/list?supportedMethods=19");
 
             String body = DevDefined.OAuth.Consumer.ConsumerRequestExtensions.ReadBody(request);
             return new JavaScriptSerializer().Deserialize<TelldusDeviceList>(body); 
